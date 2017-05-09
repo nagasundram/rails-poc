@@ -1,0 +1,10 @@
+<td>
+  <%= image.name %>
+  <%= image_tag(image.file.url, :alt => "image") %>
+</td>
+<td>
+  <%= link_to 'Change', edit_image_path(image), :class => 'button-xs' %></li>
+</td>
+<td>
+  <%= link_to("Delete", image_path(image), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') %>
+</td>
