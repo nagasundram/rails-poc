@@ -1,6 +1,8 @@
 class HomesController < ApplicationController
   def index
-    @user = current_user
-    @images = current_user.images
+    if current_user.present?
+      @user = current_user
+      @paintings = current_user.paintings
+    end
   end
 end

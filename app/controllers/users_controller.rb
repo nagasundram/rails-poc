@@ -6,6 +6,27 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    @user.password = password = SecureRandom.hex(8)
+    if @user.save
+      flash[:notice] = "The User was added!"
+      UserMailer.welcome_artist(@user, password).deliver_now
+      redirect_to users_path
+    else
+      render 'new', :alert => "Unable to update painting."
+    end
+  end
+
+  def edit
+    @painting = Painting.find(params[:id])
+  end
+
+
   def show
     @user = User.find(params[:id])
     unless current_user.admin?
@@ -40,6 +61,10 @@ class UsersController < ApplicationController
 
   def secure_params
     params.require(:user).permit(:role)
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :email)
   end
 
 end

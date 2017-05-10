@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-  enum role: [:user, :vip, :admin]
+  enum role: [:artist, :admin]
   after_initialize :set_default_role, :if => :new_record?
-  has_many :images, dependent: :destroy
+  has_many :paintings, dependent: :destroy
   def set_default_role
-    self.role ||= :user
+    self.role ||= :artist
   end
 
   # Include default devise modules. Others available are:
