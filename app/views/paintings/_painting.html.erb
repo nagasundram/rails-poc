@@ -4,8 +4,5 @@
   <%= image_tag(painting.picture.url, :alt => "painting") %>
 </td>
 <td>
-  <%= link_to 'Change', edit_painting_path(painting), :class => 'button-xs' %></li>
-</td>
-<td>
   <%= link_to("Delete", painting_path(painting), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') %>
 </td>

@@ -12,11 +12,11 @@ class PaintingsController < ApplicationController
   def create
     @painting = Painting.new(painting_params)
     @painting.user = current_user
-    if @painting.save
+    if @painting.save!
       flash[:notice] = "The painting was added!"
       redirect_to root_path
     else
-      render 'new', :alert => "Unable to update painting."
+
     end
   end
 
@@ -42,6 +42,6 @@ class PaintingsController < ApplicationController
 
   private
   def painting_params
-    params.require(:painting).permit(:picture, :name, :cost)
+    params.require(:painting).permit(:picture)
   end
 end
